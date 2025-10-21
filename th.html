@@ -65,6 +65,7 @@
         /* 2. THAN CLINIC 진료 정보 스타일 */
         /* ========================================================= */
         .clinic-info-section {
+            /* 기존 스타일 유지: 최대 너비 600px, 중앙 정렬 */
             width: 100%;
             max-width: 600px; 
             margin: 0 auto 20px; 
@@ -96,7 +97,6 @@
             object-fit: contain;
             margin-right: 15px;
             flex-shrink: 0;
-           
         }
 
         /* 이름 텍스트 컨테이너 */
@@ -114,7 +114,7 @@
             font-weight: bold;
         }
 
-        /* 진료 과목 블록 */
+        /* [수정] 진료 과목 블록: 내부 padding을 조절하고, 중앙에 배치될 수 있도록 별도의 max-width와 margin을 부여하여 줄어들게 처리 (옵션) */
         .subject-block {
             background-color: #c0c0c0;
             color: #444;
@@ -125,11 +125,15 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            /* 600px 섹션 내에서 너비를 500px로 줄이고 중앙 정렬 */
+            max-width: 500px; 
+            margin-left: auto;
+            margin-right: auto;
         }
         .subject-block span { white-space: nowrap; }
         .subject-block .en { color: #333; font-weight: normal; }
         
-        /* 진료 시간 블록 */
+        /* [수정] 진료 시간 블록: 내부 padding을 조절하고, 중앙에 배치될 수 있도록 별도의 max-width와 margin을 부여하여 줄어들게 처리 (옵션) */
         .hours-block {
             background-color: #d3d3d3;
             color: #444;
@@ -137,6 +141,10 @@
             display: flex;
             align-items: flex-start;
             font-size: 0.9em;
+            /* 600px 섹션 내에서 너비를 500px로 줄이고 중앙 정렬 */
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .hours-label {
             flex-shrink: 0; width: 100px;
@@ -152,7 +160,14 @@
 
         /* 모바일 반응형 (진료 정보) */
         @media (max-width: 450px) {
-            .subject-block, .hours-block { flex-direction: column; align-items: flex-start; }
+            /* 모바일에서는 다시 꽉 차게 변경하여 가독성 확보 */
+            .subject-block, .hours-block { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                max-width: none; /* 너비 제한 해제 */
+                width: 100%;
+                margin: 0 auto 15px; /* 중앙 정렬/마진 재설정 */
+            }
             .subject-block .ko, .subject-block .en { margin-right: 0; margin-bottom: 5px; }
             .hours-label { width: 100%; margin-bottom: 10px; text-align: center; }
             .hours-details { width: 100%; padding-top: 5px; border-top: 1px dashed #aaa; }
@@ -295,7 +310,7 @@
         padding: 5px 15px;
         border: 1px solid #80c8da;
         border-radius: 5px;
-        transition: background-color 0.2s, color 0.2s;
+        transition: background-color 0.2s, color: 0.2s;
     }
 
     .phone-link:hover {
@@ -316,7 +331,7 @@
     
     <div class="clinic-info-section">
         <div class="header-section">
-            <img src="images/logo.png" alt="โลโก้คลินิก THAN CLINIC" class="clinic-logo">
+            <img src="images/linelogo.png" alt="โลโก้คลินิก THAN CLINIC" class="clinic-logo">
             
             <div class="name-texts">
                 <div class="than-clinic-placeholder">THAN CLINIC</div>
