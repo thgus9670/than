@@ -55,7 +55,6 @@
             max-width: 800px;
             margin: 0 auto; 
             background-color: white;
-            border-radius: 8px;
             min-height: 500px; 
         }
 
@@ -64,8 +63,8 @@
         /* ========================================================= */
         .clinic-info-section {
             width: 100%;
-            max-width: 600px; 
-            margin: 0 auto 20px; 
+            max-width: 840px; 
+            margin: 0 auto 0px; 
             background-color: white;
         }
 
@@ -113,7 +112,7 @@
             font-weight: bold;
         }
 
-        /* [수정] 진료 과목 블록: 내부 padding을 조절하고, 중앙에 배치될 수 있도록 별도의 max-width와 margin을 부여하여 줄어들게 처리 (옵션) */
+        /* [수정] 진료 과목 블록: PC/태블릿 중앙 정렬 */
         .subject-block {
             background-color: #c0c0c0;
             color: #444;
@@ -123,16 +122,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
             /* 600px 섹션 내에서 너비를 500px로 줄이고 중앙 정렬 */
-            max-width: 500px; 
+            max-width: 800px; 
             margin-left: auto;
             margin-right: auto;
         }
         .subject-block span { white-space: nowrap; }
         .subject-block .en { color: #333; font-weight: normal; }
         
-        /* [수정] 진료 시간 블록: 내부 padding을 조절하고, 중앙에 배치될 수 있도록 별도의 max-width와 margin을 부여하여 줄어들게 처리 (옵션) */
+        /* [수정] 진료 시간 블록: PC/태블릿 중앙 정렬 */
         .hours-block {
             background-color: #d3d3d3;
             color: #444;
@@ -141,7 +139,7 @@
             align-items: flex-start;
             font-size: 0.9em;
             /* 600px 섹션 내에서 너비를 500px로 줄이고 중앙 정렬 */
-            max-width: 500px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -162,166 +160,225 @@
             /* 모바일에서는 다시 꽉 차게 변경하여 가독성 확보 */
             .subject-block, .hours-block { 
                 flex-direction: column; 
-                align-items: flex-start; 
+                align-items: flex-start; /* 진료과목 블록 왼쪽 정렬 유지 */
                 max-width: none; /* 너비 제한 해제 */
                 width: 100%;
                 margin: 0 auto 15px; /* 중앙 정렬/마진 재설정 */
             }
             .subject-block .ko, .subject-block .en { margin-right: 0; margin-bottom: 5px; }
-            .hours-label { width: 100%; margin-bottom: 10px; text-align: center; }
-            .hours-details { width: 100%; padding-top: 5px; border-top: 1px dashed #aaa; }
-            .hours-details .day-row { justify-content: space-between; }
-            .hours-details .day-name { width: auto; }
+            
+            /* hours-block 모바일 레이아웃 조정 */
+            .hours-block {
+                align-items: flex-start; /* hours-block 내용 전체를 왼쪽 정렬 */
+            }
+            .hours-label { 
+                width: 100%; 
+                margin-bottom: 10px; 
+                text-align: left; /* 모바일에서 '진료 시간' 레이블 왼쪽 정렬로 변경 */
+            }
+            .hours-details { 
+                width: 100%; 
+                padding-top: 5px; 
+                border-top: 1px dashed #aaa; 
+            }
+            .hours-details .day-row { 
+                justify-content: space-between; 
+            }
+            .hours-details .day-name { 
+                width: auto; 
+            }
         }
 
-    /* ========================================================= */
-    /* 3. QR 코드 문의 블록 스타일 (아이콘 제거 및 세로 정렬) */
-    /* ========================================================= */
-    .qr-section {
-        padding: 20px;
-        background-color: white;
-        max-width: 1000px;
-        margin: 20px auto; 
-    }
+        /* ========================================================= */
+        /* 3. QR 코드 문의 블록 스타일 (아이콘 제거 및 세로 정렬) */
+        /* ========================================================= */
+        .qr-section {
+            padding: 20px;
+            background-color: white;
+            max-width: 1000px;
+            margin: 20px auto; 
+        }
 
-    /* 전체 문의 컨테이너: 세로 배열 */
-    .inquiry-container {
-        display: flex;
-        flex-direction: column; 
-        align-items: center;
-        padding: 20px;
-        background-color: white;
-        border: 2px solid #a8d5e8;
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        max-width: 500px; 
-        width: 100%;
-        box-sizing: border-box;
-        margin: 0 auto;
-    }
-
-    /* 텍스트 영역 */
-    .text-area { 
-        width: 100%;
-        margin-right: 0;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .text-area p { margin: 0; line-height: 1.4; }
-    .text-area .ko { font-size: 1.2em; font-weight: bold; color: #444; }
-    .text-area .en { font-size: 1em; color: #666; }
-
-    /* QR 코드 블록 컨테이너: 세로 정렬 */
-    .qr-blocks-container {
-        display: flex;
-        flex-grow: 1;
-        flex-direction: column;
-        gap: 15px;
-        align-items: center;
-        width: 100%;
-    }
-
-    /* 개별 QR 코드 블록 링크 (클릭 영역) */
-    .qr-block-link {
-        width: 90%;
-        max-width: 350px;
-        background-color: white;
-        border-radius: 10px;
-        overflow: hidden;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        text-decoration: none;
-        color: inherit;
-        transition: transform 0.2s;
-        /* 아이콘이 사라졌으므로, 전체 블록의 상단에 약간의 패딩을 주면 좋습니다. */
-        padding-top: 10px; 
-    }
-    .qr-block-link:hover { 
-        transform: translateY(-3px); 
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
-    }
-    .qr-block { 
-        padding-bottom: 10px; 
-    }
-
-    /* 📌 QR 코드 이미지 스타일 (정사각형 및 중앙 정렬) */
-    .qr-image { 
-        width: 80%; /* 컨테이너 폭의 80% 사용 */
-        max-width: 130px; 
-        height: 130px; /* 🚨 정사각형 유지 */
-        object-fit: contain; /* 이미지가 잘리지 않고 영역 안에 맞도록 */
-        display: block; 
-        margin: 10px auto; /* 상하 여백 및 중앙 정렬 */
-        border-radius: 4px;
-        
-        /* 팁: QR 코드 이미지 배경색을 흰색으로 두려면 이 속성은 제거합니다. */
-        /* background-color: black; */
-    }
-
-    /* 모바일 반응형 (650px 이하) */
-    @media (max-width: 650px) {
+        /* 전체 문의 컨테이너: 세로 배열 */
         .inquiry-container {
-            max-width: 100%;
-            padding: 15px;
-        }
-        .qr-blocks-container {
-            gap: 10px;
-        }
-        .qr-block-link {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #a8d5e8;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            max-width: 500px; 
             width: 100%;
-            max-width: none;
+            box-sizing: border-box;
+            margin: 0 auto;
         }
-    }
 
-    /* ========================================================= */
-    /* 4. 지도 및 전화번호 스타일 (새로 추가) */
-    /* ========================================================= */
-    .map-contact-section {
-        max-width: 600px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: white;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    }
+        /* 텍스트 영역 */
+        .text-area { 
+            width: 100%;
+            margin-right: 0;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .text-area p { margin: 0; line-height: 1.4; }
+        .text-area .ko { font-size: 1.2em; font-weight: bold; color: #444; }
+        .text-area .en { font-size: 1em; color: #666; }
 
-    .map-image-container {
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
-        border-radius: 6px;
-        overflow: hidden;
-    }
+        /* QR 코드 블록 컨테이너: 세로 정렬 */
+        .qr-blocks-container {
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            width: 100%;
+        }
 
-    .map-image {
-        width: 100%;
-        /* 지도의 비율을 유지하면서 컨테이너에 맞춤 */
-        height: auto; 
-        display: block;
-    }
+        /* 개별 QR 코드 블록 링크 (클릭 영역) */
+        .qr-block-link {
+            width: 90%;
+            max-width: 200px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+            padding-top: 10px; 
+        }
+        .qr-block-link:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
+        }
+        .qr-block { 
+            padding-bottom: 10px; 
+        }
 
-    .contact-info {
-        text-align: center;
-        padding: 15px 0;
-        border-top: 1px solid #eee;
-    }
+        /* 📌 QR 코드 이미지 스타일 (정사각형 및 중앙 정렬) */
+        .qr-image { 
+            width: 80%; /* 컨테이너 폭의 80% 사용 */
+            max-width: 130px; 
+            height: 130px; /* 🚨 정사각형 유지 */
+            object-fit: contain; /* 이미지가 잘리지 않고 영역 안에 맞도록 */
+            display: block; 
+            margin: 10px auto; /* 상하 여백 및 중앙 정렬 */
+            border-radius: 4px;
+        }
 
-    .phone-link {
-        font-size: 1.5em;
-        font-weight: bold;
-        color: #80c8da; /* 파란색으로 링크 강조 */
-        text-decoration: none;
-        display: inline-block;
-        padding: 5px 15px;
-        border: 1px solid #80c8da;
-        border-radius: 5px;
-        transition: background-color 0.2s, color 0.2s;
-    }
+        /* 모바일 반응형 (650px 이하) */
+        @media (max-width: 650px) {
+            .inquiry-container {
+                max-width: 100%;
+                padding: 15px;
+            }
+            .qr-blocks-container {
+                gap: 10px;
+            }
+            .qr-block-link {
+                width: 100%;
+                max-width: none;
+            }
+        }
 
-    .phone-link:hover {
-        background-color: #80c8da;
-        color: white;
-    }
-    /* ========================================================= */
+        /* ========================================================= */
+        /* 4. 지도 및 전화번호 스타일 (새로 추가) */
+        /* ========================================================= */
+        .map-contact-section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+        }
+
+        .map-image-container {
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .map-image {
+            width: 100%;
+            /* 지도의 비율을 유지하면서 컨테이너에 맞춤 */
+            height: auto; 
+            display: block;
+        }
+        
+        /* 지도 및 전화번호 섹션 내 주소 스타일 */
+.address-info {
+    text-align: left;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.address-row {
+    margin-bottom: 15px; /* 행 간격 조정 */
+}
+
+.address-row p {
+    margin: 5px 0;
+    position: relative;
+    padding-left: 0; /* 기존 padding-left 제거 */
+}
+
+/* 주소 구분선 (세로줄) 스타일: 제목에만 적용 */
+.address-row .title {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 5px;
+    padding-left: 10px; /* 구분선 공간 확보 */
+}
+
+.address-row .title::before {
+    content: "|";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: bold;
+    color: #80c8da; /* 메뉴바 색상과 동일 */
+}
+
+.address-row .detail {
+    font-size: 1em;
+    color: #666;
+    padding-left: 10px; /* 제목과 정렬을 맞추기 위해 추가 */
+}
+
+.address-row .note {
+    font-size: 0.9em;
+    color: #888;
+    padding-left: 10px; /* 제목과 정렬을 맞추기 위해 추가 */
+}
+/* ... (나머지 CSS 유지) ... */
+
+
+        .contact-info {
+            text-align: center;
+            padding: 15px 0;
+            /* border-top: 1px solid #eee; */ /* 주소와 전화번호 사이에 구분선 필요 없음 (address-info에 넣음) */
+        }
+
+        .phone-link {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #80c8da; /* 파란색으로 링크 강조 */
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 1px solid #80c8da;
+            border-radius: 5px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .phone-link:hover {
+            background-color: #80c8da;
+            color: white;
+        }
+        /* ========================================================= */
     </style>
 </head>
 <body>
@@ -413,6 +470,18 @@
                 <img src="images/jido.jpg" alt="클리닉 위치 지도" class="map-image">
             </div>
 
+            <div class="address-info">
+                <div class="address-row korean">
+                    <p class="title">찾아오시는 길</p>
+                    <p class="detail">창원시 성산구 중앙대로 100번길 13 4층 (CGV 창원상남 건물 4층)</p>
+
+                </div>
+
+                <div class="address-row english">
+                    <p class="title">Address</p>
+                    <p class="detail">4F, (CGV Changwon Sangnam), 13 Jungang-daero 100beon-gil, Seongsan-gu, Changwon-si</p>
+                </div>
+            </div>
             <div class="contact-info">
                 <p style="font-size: 1.1em; margin-bottom: 10px;">전화 문의 Phone Inquiry</p>
                 <a href="tel:+82555555555" class="phone-link">
@@ -432,4 +501,3 @@
     </div>
 </body>
 </html>
-
