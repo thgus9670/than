@@ -59,31 +59,45 @@
         }
 
         /* ========================================================= */
-        /* 2. THAN CLINIC 진료 정보 스타일 (수정됨) */
+        /* 2. THAN CLINIC 진료 정보 스타일 (수정 완료) */
         /* ========================================================= */
+        /* .clinic-info-section (외곽 컨테이너) 수정 */
         .clinic-info-section {
             width: 100%;
-            max-width: 840px; 
-            margin: 0 auto 0px; 
-            background-color: white;
+            /* 기존의 max-width/background-color/margin을 제거하여 Wrapper가 관리하도록 변경 */
+            margin: 0 auto; 
+            padding: 20px 0; 
+            background-color: transparent; 
         }
 
+        /* 🟢 새로 추가: clinic-info-wrapper 스타일 (너비 제한 및 박스 효과) */
+        .clinic-info-wrapper {
+            max-width: 600px; /* ★ 모든 진료 정보 내용의 너비가 이 값으로 제한됩니다. */
+            margin: 0 auto; /* 중앙 정렬 */
+            background-color: white; /* 박스 내부 배경을 흰색으로 통일 */
+            border-radius: 8px; /* 모서리 둥글게 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+            overflow: hidden; /* 내부 요소가 경계를 벗어나지 않도록 처리 */
+        }
+        
         /* 상단 헤더 영역 (로고 및 이름) - 가로 정렬 */
         .header-section {
             padding: 30px 20px;
-            display: flex; /* 로고와 이름만 옆으로 나열 */
+            display: flex; 
             align-items: flex-start;
             border-bottom: 1px solid #eee;
             position: relative;
         }
+        /* 🟢 수정됨: 점선 패턴 시각적으로만 제거 (레이아웃 안정성 유지) */
         .header-section::after {
             content: "";
             position: absolute;
             top: 0; right: 0;
             width: 80px; height: 100%;
-            background-image: rnoneadial-gradient(#ddd 10%, transparent 10%);
-            background-size: 10px 10px;
-            opacity: 0.3;
+            /* 배경 이미지와 투명도 제거/0으로 설정 */
+            background-image: none; 
+            opacity: 0; 
+            background-size: 10px 10px; /* 기존 속성은 유지 */
         }
 
         /* 🟢 로고 이미지 스타일 */
@@ -93,7 +107,6 @@
             object-fit: contain;
             margin-right: 15px;
             flex-shrink: 0;
-            
         }
 
         /* 이름 텍스트 컨테이너 */
@@ -112,9 +125,9 @@
             font-weight: bold;
         }
 
-        /* [수정] 진료 과목 블록: PC/태블릿 중앙 정렬 */
+        /* [수정] 진료 과목 블록: 배경색 흰색으로 통일 및 너비 제한 제거 (Wrapper가 관리) */
         .subject-block {
-            background-color: #c0c0c0;
+            background-color: white; /* 🟢 흰색으로 통일 */
             color: #444;
             padding: 15px 20px;
             font-size: 1em;
@@ -122,26 +135,23 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            /* 600px 섹션 내에서 너비를 500px로 줄이고 중앙 정렬 */
-            max-width: 800px; 
-            margin-left: auto;
-            margin-right: auto;
+            border-bottom: 1px solid #eee; /* 구분선 유지 */
+            max-width: none; /* Wrapper가 너비 관리 */
+            margin: 0; /* Wrapper가 마진 관리 */
         }
         .subject-block span { white-space: nowrap; }
-        .subject-block .en { color: #333; font-weight: normal; }
+        .subject-block .en { color: #333; font-weight: normal; margin-left: 10px; }
         
-        /* [수정] 진료 시간 블록: PC/태블릿 중앙 정렬 */
+        /* [수정] 진료 시간 블록: 배경색 흰색으로 통일 및 너비 제한 제거 (Wrapper가 관리) */
         .hours-block {
-            background-color: #d3d3d3;
+            background-color: white; /* 🟢 흰색으로 통일 */
             color: #444;
             padding: 15px 20px;
             display: flex;
             align-items: flex-start;
             font-size: 0.9em;
-            /* 600px 섹션 내에서 너비를 500px로 줄이고 중앙 정렬 */
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: none; /* Wrapper가 너비 관리 */
+            margin: 0; /* Wrapper가 마진 관리 */
         }
         .hours-label {
             flex-shrink: 0; width: 100px;
@@ -157,24 +167,24 @@
 
         /* 모바일 반응형 (진료 정보) */
         @media (max-width: 450px) {
-            /* 모바일에서는 다시 꽉 차게 변경하여 가독성 확보 */
+            /* 모바일에서도 너비는 Wrapper에 의해 제한되므로, flex-direction만 변경 */
             .subject-block, .hours-block { 
                 flex-direction: column; 
-                align-items: flex-start; /* 진료과목 블록 왼쪽 정렬 유지 */
-                max-width: none; /* 너비 제한 해제 */
-                width: 100%;
-                margin: 0 auto 15px; /* 중앙 정렬/마진 재설정 */
+                align-items: flex-start;
+                max-width: none; 
+                width: auto; 
+                margin: 0; 
             }
-            .subject-block .ko, .subject-block .en { margin-right: 0; margin-bottom: 5px; }
+            .subject-block .ko, .subject-block .en { margin-right: 0; margin-bottom: 5px; margin-left: 0; }
             
             /* hours-block 모바일 레이아웃 조정 */
             .hours-block {
-                align-items: flex-start; /* hours-block 내용 전체를 왼쪽 정렬 */
+                align-items: flex-start; 
             }
             .hours-label { 
                 width: 100%; 
                 margin-bottom: 10px; 
-                text-align: left; /* 모바일에서 '진료 시간' 레이블 왼쪽 정렬로 변경 */
+                text-align: left; 
             }
             .hours-details { 
                 width: 100%; 
@@ -190,11 +200,12 @@
         }
 
         /* ========================================================= */
-        /* 3. QR 코드 문의 블록 스타일 (아이콘 제거 및 세로 정렬) */
+        /* 3. QR 코드 문의 블록 스타일 (기존 유지) */
         /* ========================================================= */
         .qr-section {
             padding: 20px;
-            background-color: white;
+            /* main-content 안에 들어가므로 배경색은 white 유지 */
+            background-color: white; 
             max-width: 1000px;
             margin: 20px auto; 
         }
@@ -285,7 +296,7 @@
         }
 
         /* ========================================================= */
-        /* 4. 지도 및 전화번호 스타일 (새로 추가) */
+        /* 4. 지도 및 전화번호 스타일 (기존 유지) */
         /* ========================================================= */
         .map-contact-section {
             max-width: 600px;
@@ -306,66 +317,63 @@
             display: block;
         }
         
-/* 지도 및 전화번호 섹션 내 주소 스타일 */
-.address-info {
-    text-align: left;
-    padding: 10px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
+        /* 지도 및 전화번호 섹션 내 주소 스타일 */
+        .address-info {
+            text-align: left;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
 
-.address-row {
-    margin-bottom: 15px; /* 행 간격 조정 */
-}
+        .address-row {
+            margin-bottom: 15px; /* 행 간격 조정 */
+        }
 
-.address-row p {
-    margin: 5px 0;
-    position: relative;
-    padding-left: 0; /* 기존 padding-left 제거 */
-}
+        .address-row p {
+            margin: 5px 0;
+            position: relative;
+            padding-left: 0; 
+        }
 
-/* 주소 구분선 (세로줄) 스타일: 제목에만 적용 */
-.address-row .title {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 5px;
-    padding-left: 10px; /* 구분선 공간 확보 */
-}
+        /* 주소 구분선 (세로줄) 스타일: 제목에만 적용 */
+        .address-row .title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #444;
+            margin-bottom: 5px;
+            padding-left: 10px; 
+        }
 
-.address-row .title::before {
-    content: "|";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-weight: bold;
-    color: #80c8da; /* 메뉴바 색상과 동일 */
-}
+        .address-row .title::before {
+            content: "|";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            color: #80c8da; 
+        }
 
-.address-row .detail {
-    font-size: 1em;
-    color: #666;
-    padding-left: 10px; /* 제목과 정렬을 맞추기 위해 추가 */
-}
+        .address-row .detail {
+            font-size: 1em;
+            color: #666;
+            padding-left: 10px; 
+        }
 
-.address-row .note {
-    font-size: 0.9em;
-    color: #888;
-    padding-left: 10px; /* 제목과 정렬을 맞추기 위해 추가 */
-}
-/* ... (나머지 CSS 유지) ... */
-
+        .address-row .note {
+            font-size: 0.9em;
+            color: #888;
+            padding-left: 10px; 
+        }
 
         .contact-info {
             text-align: center;
             padding: 15px 0;
-            /* border-top: 1px solid #eee; */ /* 주소와 전화번호 사이에 구분선 필요 없음 (address-info에 넣음) */
         }
 
         .phone-link {
             font-size: 1.5em;
             font-weight: bold;
-            color: #80c8da; /* 파란색으로 링크 강조 */
+            color: #80c8da; 
             text-decoration: none;
             display: inline-block;
             padding: 5px 15px;
@@ -391,49 +399,46 @@
     </div>
     
     <div class="clinic-info-section">
-    <div class="header-section">
-        <img src="images/logo.png" alt="THAN CLINIC 로고" class="clinic-logo">
-        
-        <div class="name-texts">
-            <div class="than-clinic-placeholder">THAN CLINIC</div>
-            <div class="korean-name">처음부터 댄의원</div>
-        </div>
-    </div>
-    
-    
-</div>
-
-        <div class="subject-block">
-            <span class="ko">진료 과목 : 피부과</span>
-            <span class="en">Treatment subject : Dermatology</span>
-        </div>
-
-        <div class="hours-block">
-            <div class="hours-label">
-                <div class="ko">진료 시간</div>
-                <div class="en">Office hours</div>
-            </div>
-            <div class="hours-details">
-                <div class="day-row">
-                    <span class="day-name">평일 Weekday</span>
-                    <span class="time-info">10:00 ~ 20:00 
-                        <span class="break-time">(break time 13h ~ 14h)</span>
-                    </span>
-                </div>
-                <div class="day-row">
-                    <span class="day-name">토요일 Saturday</span>
-                    <span class="time-info">10:00 ~ 14:00 
-                        <span class="closed">(Closed on Sundays)</span>
-                    </span>
+        <div class="clinic-info-wrapper">
+            
+            <div class="header-section">
+                <img src="images/logo.png" alt="THAN CLINIC 로고" class="clinic-logo">
+                
+                <div class="name-texts">
+                    <div class="than-clinic-placeholder">THAN CLINIC</div>
+                    <div class="korean-name">처음부터 댄의원</div>
                 </div>
             </div>
-        </div>
-    </div>
+            
+            <div class="subject-block">
+                <span class="ko">진료 과목 : 피부과</span>
+                <span class="en">Treatment subject : Dermatology</span>
+            </div>
 
-    <div class="main-content">
+            <div class="hours-block">
+                <div class="hours-label">
+                    <div class="ko">진료 시간</div>
+                    <div class="en">Office hours</div>
+                </div>
+                <div class="hours-details">
+                    <div class="day-row">
+                        <span class="day-name">평일 Weekday</span>
+                        <span class="time-info">10:00 ~ 20:00 
+                            <span class="break-time">(break time 13h ~ 14h)</span>
+                        </span>
+                    </div>
+                    <div class="day-row">
+                        <span class="day-name">토요일 Saturday</span>
+                        <span class="time-info">10:00 ~ 14:00 
+                            <span class="closed">(Closed on Sundays)</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div> </div> <div class="main-content">
         <h2>문의하기 Inquiry</h2>
         
-
         <div class="qr-section">
             <div class="inquiry-container">
                 <div class="text-area">
@@ -443,30 +448,31 @@
 
                 <div class="qr-blocks-container">
     
-    <a href="https://www.naver.com/" class="qr-block-link line" target="_blank">
-        <div class="qr-block">
-            <img src="images/linelogo.png" alt="LINE QR 코드" class="qr-image">
-            <p style="font-size:1.1em; color:#00B900; font-weight:bold; margin: 0 0 10px 0;">LINE</p>
-        </div>
-    </a>
+                    <a href="https://www.naver.com/" class="qr-block-link line" target="_blank">
+                        <div class="qr-block">
+                            <img src="images/linelogo.png" alt="LINE QR 코드" class="qr-image">
+                            <p style="font-size:1.1em; color:#00B900; font-weight:bold; margin: 0 0 10px 0;">LINE</p>
+                        </div>
+                    </a>
 
-    <a href="https://www.naver.com/" class="qr-block-link talk" target="_blank">
-        <div class="qr-block">
-            <img src="images/kakaologo.png" alt="카카오톡 QR 코드" class="qr-image">
-            <p style="font-size:1.1em; color:#FFC300; font-weight:bold; margin: 0 0 10px 0;">KakaoTalk</p>
-        </div>
-    </a>
+                    <a href="https://www.naver.com/" class="qr-block-link talk" target="_blank">
+                        <div class="qr-block">
+                            <img src="images/kakaologo.png" alt="카카오톡 QR 코드" class="qr-image">
+                            <p style="font-size:1.1em; color:#FFC300; font-weight:bold; margin: 0 0 10px 0;">KakaoTalk</p>
+                        </div>
+                    </a>
 
-    <a href="https://www.naver.com/" class="qr-block-link insta" target="_blank">
-        <div class="qr-block">
-            <img src="images/instalogo.png" alt="인스타그램 QR 코드" class="qr-image insta-qr">
-            <p style="font-size:1.1em; color:#E1306C; font-weight:bold; margin: 0 0 10px 0;">Instagram</p>
-        </div>
-    </a>
-</div>
+                    <a href="https://www.naver.com/" class="qr-block-link insta" target="_blank">
+                        <div class="qr-block">
+                            <img src="images/instalogo.png" alt="인스타그램 QR 코드" class="qr-image insta-qr">
+                            <p style="font-size:1.1em; color:#E1306C; font-weight:bold; margin: 0 0 10px 0;">Instagram</p>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
-    <div class="map-contact-section">
+        
+        <div class="map-contact-section">
             <h2>오시는 길 Location</h2>
             
             <div class="map-image-container">
@@ -477,7 +483,6 @@
                 <div class="address-row korean">
                     <p class="title">찾아오시는 길</p>
                     <p class="detail">창원시 성산구 중앙대로 100번길 13 4층 (CGV 창원상남 건물 4층)</p>
-
                 </div>
 
                 <div class="address-row english">
@@ -485,6 +490,7 @@
                     <p class="detail">4F, (CGV Changwon Sangnam), 13 Jungang-daero 100beon-gil, Seongsan-gu, Changwon-si</p>
                 </div>
             </div>
+            
             <div class="contact-info">
                 <p style="font-size: 1.1em; margin-bottom: 10px;">전화 문의 Phone Inquiry</p>
                 <a href="tel:+82552867579" class="phone-link">
@@ -499,9 +505,6 @@
             </div>
         </div>
 
-        </div>
-        
     </div>
 </body>
-
 </html>
